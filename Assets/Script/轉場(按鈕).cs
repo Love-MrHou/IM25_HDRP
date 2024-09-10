@@ -9,7 +9,7 @@ public class SceneChangerButton : MonoBehaviour
 
     void Start()
     {
-        ChangeButton.SetActive(false);
+
     }
 
     // 當按下按鈕時調用此方法
