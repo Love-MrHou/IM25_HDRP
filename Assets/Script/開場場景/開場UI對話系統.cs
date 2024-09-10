@@ -1,23 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using TMPro;
-using System.IO;
 using System.Globalization;
-using System; 
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
     public AudioSource audioSource; // 音頻播放器
-    public TextMeshProUGUI dialogueText; // 使用TextMeshProUGUI的對話框
+    public Text dialogueText; // UI對話框的文字
     public TextAsset subtitlesFile; // 外部 txt 檔案
-    public float typingSpeed = 3f; // 每個字符的顯示間隔（秒）
+    public float typingSpeed = 0.05f; // 每個字符的顯示間隔（秒）
+    public GameObject button; // 按鈕
 
     private string[] subtitles; // 字幕文本
     private float[] subtitleTimings; // 每個字幕出現的時間（秒）
 
     void Start()
     {
+        // 隱藏按鈕，等待字幕顯示完成後再顯示
+        button.SetActive(false);
+
         // 讀取字幕內容和時間
         ParseSubtitles(subtitlesFile.text);
 
@@ -71,15 +73,12 @@ public class DialogueManager : MonoBehaviour
             Debug.Log($"Waiting for {waitTime} seconds before showing subtitle {i}");
             yield return new WaitForSeconds(waitTime);
 
-            // 逐字顯示當前字幕，保留之前的字幕
+            // 逐字顯示當前字幕
             yield return StartCoroutine(TypeSentence(subtitles[i]));
         }
 
-        // 等待音頻播放結束後，清空字幕
-        float remainingTime = audioSource.clip.length - subtitleTimings[subtitleTimings.Length - 1];
-        Debug.Log($"Waiting for remaining time: {remainingTime}");
-        yield return new WaitForSeconds(remainingTime);
-        dialogueText.text = "";
+        // 當字幕顯示完成後，立即顯示按鈕
+        button.SetActive(true);
     }
 
     // 逐字顯示文本，保留之前的文本
@@ -88,6 +87,13 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter; // 逐字添加到對話框
+
+            // 在句號後添加換行符
+            if (letter == '。' || letter == '!' || letter == '！' || letter == '.')
+            {
+                dialogueText.text += "\n"; // 添加換行符
+            }
+
             yield return new WaitForSeconds(typingSpeed); // 等待指定時間後再顯示下一個字符
         }
     }
