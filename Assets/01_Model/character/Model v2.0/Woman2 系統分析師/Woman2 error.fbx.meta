@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dc7fa2897e4357548867673b7c79827f
+guid: 448423657ec119e45aecc0f9b59ac17e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,30 +7,30 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Man3_AvatarBody
-    second: {fileID: 2100000, guid: 7cc44398b931e794b8c93e366523de33, type: 2}
+      name: Woman2_AvatarBody
+    second: {fileID: 2100000, guid: c2d65c20fdf091c49bc18ffc7bcfa93e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Man3_AvatarHead
-    second: {fileID: 2100000, guid: 3d5a9ecd2c2d41e45bb70a799b48c81d, type: 2}
+      name: Woman2_AvatarHead
+    second: {fileID: 2100000, guid: 89229065c9505b54e9752599098706df, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Man3_AvatarLeftCornea
-    second: {fileID: 2100000, guid: 48994d743e3c2854abf3a5d673fa397a, type: 2}
+      name: Woman2_AvatarLeftCornea
+    second: {fileID: 2100000, guid: 964405fdbdf381f4f92d15fd7b0bf665, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Man3_AvatarRightCornea
-    second: {fileID: 2100000, guid: 5514223f88045b7448da31bc26a8d992, type: 2}
+      name: Woman2_AvatarRightCornea
+    second: {fileID: 2100000, guid: 1450b257de818ae4ba1a5dba9c8715eb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Man3_outfit
-    second: {fileID: 2100000, guid: f30c76483d6c3e449b2199e55f14d8c1, type: 2}
+      name: Woman2_outfit
+    second: {fileID: 2100000, guid: c84420a1170fd624e871f5b1435cb23e, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
