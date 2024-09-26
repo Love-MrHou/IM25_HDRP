@@ -4,21 +4,35 @@ root = true
 # 適用於所有文件的設定
 [*]
 charset = utf-8
-indent_style = space  # 使用空格進行縮排
-indent_size = 4
-end_of_line = lf  # 統一使用 LF 作為行尾符號
-insert_final_newline = true  # 確保文件最後一行有換行符號
-
-# C# 檔案的特定設定
-[*.cs]
-
-#### 核心 EditorConfig 選項 ####
-
-# 縮排和間距
-indent_size = 4
 indent_style = space
-tab_width = 4
+indent_size = 4
+end_of_line = lf
+insert_final_newline = true
 
-# 新行喜好設定
+# 針對 C# 腳本的格式化規則
+[*.cs]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+insert_final_newline = true
+
+# 針對 Shader 文件
+[*.shader]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+insert_final_newline = true
+
+# 針對 YAML 文件 (*.meta, *.unity, *.prefab, *.asset)
+[*.{yaml,unity,prefab,asset,meta}]
+indent_style = space
+indent_size = 2  # YAML 文件通常使用 2 個空格縮排
+end_of_line = lf
+insert_final_newline = true
+
+# 針對 JSON 文件
+[*.json]
+indent_style = space
+indent_size = 2  # JSON 文件通常使用 2 個空格縮排
 end_of_line = lf
 insert_final_newline = true
