@@ -241,7 +241,7 @@ public class meetingchoice : MonoBehaviour
             Debug.LogWarning("未找到標註");
         }
 
-        string currentSpeaker = GetCurrentSpeaker(); // 取得當前講話角色
+        string currentSpeaker = GetCurrentSpeaker(); // 取得當前講話角色1
         switch (currentSpeaker)
         {
             case "系統分析師":
