@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class TTSDemo : MonoBehaviour
 {
     public AudioSource audioSource;
-    public Text textUI;  // ¥Î¨ÓÅã¥Ü©MÀx¦s­nÂà´«¦¨»y­µªº¤å¦r
+    public Text textUI;  // ç”¨ä¾†é¡¯ç¤ºå’Œå„²å­˜è¦è½‰æ›æˆèªéŸ³çš„æ–‡å­—
 
     private string previousText = "";
-    private string currentText = ""; // ¥Î¨ÓÀx¦s¥Ø«e¦bText UI¤¤­nÂà´«ªº¤å¦r
+    private string currentText = ""; // ç”¨ä¾†å„²å­˜ç›®å‰åœ¨Text UIä¸­è¦è½‰æ›çš„æ–‡å­—
     private SpeechSynthesizer synthesizer;
 
     void Start()
@@ -21,36 +21,36 @@ public class TTSDemo : MonoBehaviour
 
         var config = SpeechConfig.FromSubscription("155998f0555f47ae9ad78430ef6491aa", "eastus");
         config.SpeechSynthesisLanguage = "zh-CN";
-        config.SpeechSynthesisVoiceName = "zh-CN-XiaoxiaoNeural";
+        config.SpeechSynthesisVoiceName = "zh-TW-YunJheNeural";
         var audioConfig = AudioConfig.FromDefaultSpeakerOutput();
         synthesizer = new SpeechSynthesizer(config, audioConfig);
     }
 
     void Update()
     {
-        // ¦pªGText UI¤¤ªº¤å¦r©M¤§«eªº¤å¦r¤£¦P¡A«h¶i¦æ»y­µ¦X¦¨
+        // å¦‚æœText UIä¸­çš„æ–‡å­—å’Œä¹‹å‰çš„æ–‡å­—ä¸åŒï¼Œå‰‡é€²è¡ŒèªéŸ³åˆæˆ
         if (textUI != null && textUI.text != previousText)
         {
-            currentText = textUI.text; // ±NText UI¤¤ªº¤å¦r§ó·s¨ìcurrentText
+            currentText = textUI.text; // å°‡Text UIä¸­çš„æ–‡å­—æ›´æ–°åˆ°currentText
 
-            // ¦pªG·í«e»y­µ¥¿¦b¼½©ñ¡A°±¤î¨Ã¤¤Â_
+            // å¦‚æœç•¶å‰èªéŸ³æ­£åœ¨æ’­æ”¾ï¼Œåœæ­¢ä¸¦ä¸­æ–·
             if (audioSource.isPlaying)
             {
-                audioSource.Stop(); // °±¤î¥Ø«e¥¿¦b¼½©ñªº­µÀW
+                audioSource.Stop(); // åœæ­¢ç›®å‰æ­£åœ¨æ’­æ”¾çš„éŸ³é »
             }
 
-            // ¦pªG¥¿¦b¶i¦æ»y­µ¦X¦¨¡A°±¤î¦X¦¨
+            // å¦‚æœæ­£åœ¨é€²è¡ŒèªéŸ³åˆæˆï¼Œåœæ­¢åˆæˆ
             StopCurrentSpeechSynthesis();
 
-            // ­«·s¦X¦¨¨Ã¼½©ñ·sªº»y­µ
+            // é‡æ–°åˆæˆä¸¦æ’­æ”¾æ–°çš„èªéŸ³
             SynthesizeAndPlayText(currentText);
-            previousText = currentText; // §ó·spreviousText
+            previousText = currentText; // æ›´æ–°previousText
         }
     }
 
     public async void SynthesizeAndPlayText(string text)
     {
-        var result = await synthesizer.SpeakTextAsync(text); // ¦X¦¨Text UI¤¤ªº¤å¦r
+        var result = await synthesizer.SpeakTextAsync(text); // åˆæˆText UIä¸­çš„æ–‡å­—
 
         if (result.Reason == ResultReason.SynthesizingAudioCompleted)
         {
@@ -66,7 +66,7 @@ public class TTSDemo : MonoBehaviour
             audioSource.clip = audioClip;
             audioSource.Play();
 
-            Debug.Log("»y­µ¦X¦¨¦¨¥\¡I");
+            Debug.Log("èªéŸ³åˆæˆæˆåŠŸï¼");
         }
         else if (result.Reason == ResultReason.Canceled)
         {
@@ -75,21 +75,21 @@ public class TTSDemo : MonoBehaviour
         }
     }
 
-    // °±¤î·í«e»y­µ¦X¦¨ªº¨ç¼Æ
+    // åœæ­¢ç•¶å‰èªéŸ³åˆæˆçš„å‡½æ•¸
     public void StopCurrentSpeechSynthesis()
     {
         if (synthesizer != null)
         {
-            synthesizer.StopSpeakingAsync().Wait(); // °±¤î¥Ø«eªº»y­µ¦X¦¨
+            synthesizer.StopSpeakingAsync().Wait(); // åœæ­¢ç›®å‰çš„èªéŸ³åˆæˆ
         }
     }
 
-    // ¥Î¨Ó§ó·sText UI¤¤ªº¤å¦rªº¨ç¼Æ¡A·í¥~³¡»İ­n§ó·s®É¥i¥H½Õ¥Î¦¹¨ç¼Æ
+    // ç”¨ä¾†æ›´æ–°Text UIä¸­çš„æ–‡å­—çš„å‡½æ•¸ï¼Œç•¶å¤–éƒ¨éœ€è¦æ›´æ–°æ™‚å¯ä»¥èª¿ç”¨æ­¤å‡½æ•¸
     public void UpdateTextUI(string newText)
     {
         if (textUI != null)
         {
-            textUI.text = newText; // ±NText UI¤¤ªº¤å¦r§ó·s
+            textUI.text = newText; // å°‡Text UIä¸­çš„æ–‡å­—æ›´æ–°
         }
         else
         {
