@@ -631,8 +631,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.110221, y: 8.2662945, z: 5.444321}
-  m_Center: {x: 0.60575575, y: 3.6331472, z: 0.83241343}
+  m_Size: {x: 8.461961, y: 8.2662945, z: 5.8418818}
+  m_Center: {x: -0.5701168, y: 3.6331472, z: 1.0311937}
 --- !u!114 &858992364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1398,7 +1398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7286113830113935179}
-  - component: {fileID: 1442494573777823072}
+  - component: {fileID: 7286113830113935180}
   m_Layer: 5
   m_Name: DialogSystem
   m_TagString: Untagged
@@ -5711,8 +5711,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1442494573777823072}
-        m_TargetAssemblyTypeName: DialogManger, Assembly-CSharp
+      - m_Target: {fileID: 7286113830113935180}
+        m_TargetAssemblyTypeName: "\u7CFB\u7D71\u5206\u6790\u5E2B\u8173\u672C, Assembly-CSharp"
         m_MethodName: MakeChoice
         m_Mode: 3
         m_Arguments:
@@ -6490,24 +6490,6 @@ MonoBehaviour:
   - {fileID: 4059005600549662359}
   - {fileID: 1319627188672661854}
   _inkAssets: {fileID: 4900000, guid: 5748f4c7dfa220540a1fca8d0fba07b7, type: 3}
---- !u!114 &1442494573777823072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63985404684021754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b566c4dc70ed6f34fa990223eb8bbb21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diaglogText: {fileID: 3814888878178771948}
-  buttons:
-  - {fileID: 7070160673181092815}
-  - {fileID: 4059005600389471868}
-  - {fileID: 1319627188295989685}
-  _inkAssets: {fileID: 4900000, guid: 70c15a8ed8d49994fb579ec0c193afce, type: 3}
 --- !u!114 &1442494574007429207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16547,8 +16529,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1442494573777823072}
-        m_TargetAssemblyTypeName: DialogManger, Assembly-CSharp
+      - m_Target: {fileID: 7286113830113935180}
+        m_TargetAssemblyTypeName: "\u7CFB\u7D71\u5206\u6790\u5E2B\u8173\u672C, Assembly-CSharp"
         m_MethodName: MakeChoice
         m_Mode: 3
         m_Arguments:
@@ -21731,8 +21713,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1442494573777823072}
-        m_TargetAssemblyTypeName: DialogManger, Assembly-CSharp
+      - m_Target: {fileID: 7286113830113935180}
+        m_TargetAssemblyTypeName: "\u7CFB\u7D71\u5206\u6790\u5E2B\u8173\u672C, Assembly-CSharp"
         m_MethodName: NextDialog
         m_Mode: 1
         m_Arguments:
@@ -29091,8 +29073,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1442494573777823072}
-        m_TargetAssemblyTypeName: DialogManger, Assembly-CSharp
+      - m_Target: {fileID: 7286113830113935180}
+        m_TargetAssemblyTypeName: "\u7CFB\u7D71\u5206\u6790\u5E2B\u8173\u672C, Assembly-CSharp"
         m_MethodName: MakeChoice
         m_Mode: 3
         m_Arguments:
@@ -30614,6 +30596,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7286113830113935180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63985404684021754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d70297c58f48a4ab108ab32e2ceda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diaglogText: {fileID: 3814888878178771948}
+  buttons:
+  - {fileID: 7070160673181092815}
+  - {fileID: 4059005600389471868}
+  - {fileID: 1319627188295989685}
+  _inkAssets: {fileID: 4900000, guid: 70c15a8ed8d49994fb579ec0c193afce, type: 3}
 --- !u!224 &7286113830291902368
 RectTransform:
   m_ObjectHideFlags: 0
