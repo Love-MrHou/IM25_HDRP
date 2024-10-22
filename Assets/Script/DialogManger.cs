@@ -122,15 +122,13 @@ public class DialogManger : MonoBehaviour
 
         Debug.Log(dialogHistory[currentDialogIndex]);
     }
-
-
-
     private void SetChoices()
     {
         for (int i = 0; i < story.currentChoices.Count; i++)
         {
             buttons[i].gameObject.SetActive(true);
             buttons[i].GetComponentInChildren<Text>().text = story.currentChoices[i].text;
+
         }
     }
 
