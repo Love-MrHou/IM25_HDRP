@@ -30860,7 +30860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &7315170454288167902
 GameObject:
   m_ObjectHideFlags: 0
@@ -30932,7 +30932,7 @@ GameObject:
   - component: {fileID: 8648694086283021915}
   - component: {fileID: 1140932351}
   m_Layer: 5
-  m_Name: "\u7D71\u5206\u6790\u5E2B\u5C0D\u8A71\u6846"
+  m_Name: "\u7CFB\u7D71\u5206\u6790\u5E2B\u5C0D\u8A71\u6846"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
