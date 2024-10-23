@@ -28,11 +28,11 @@ VAR choiceC5_done = false
 {(choiceA1_done && choiceA2_done && choiceA3_done && choiceA4_done && choiceA5_done) && (choiceB1_done && choiceB2_done && choiceB3_done && choiceB4_done && choiceB5_done) && (choiceC1_done && choiceC2_done && choiceC3_done && choiceC4_done && choiceC5_done) :
     * [統整公司分析] -> summaryAndAnalysis
 }
-* GreenVital Foods的需求分析
+* [GreenVital Foods的需求分析]
     -> companyA
-* Elegance Accessories的需求分析
+* [Elegance Accessories的需求分析]
     -> companyB
-* EcoEssentials的需求分析
+* [EcoEssentials的需求分析]
     -> companyC  
 
 
@@ -40,6 +40,7 @@ VAR choiceC5_done = false
 {choiceA1_done && choiceA2_done && choiceA3_done && choiceA4_done && choiceA5_done:
     * [進行其他公司分析]  -> analysis
 }
+請選擇要對GreenVital Foods進行分析的問題：
 *[您提到的年輕人群體具體是指哪個年齡段？] {not choiceA1_done} ->choiceA1
 *[在預算方面，您希望如何分配這100,000美元？] {not choiceA2_done} ->choiceA2
 *[在六個月內達成20%的品牌認知度提升，您覺得這個時程安排可行嗎？是否有過類似的經驗來支持這個目標？] {not choiceA3_done} ->choiceA3
@@ -67,23 +68,28 @@ VAR choiceC5_done = false
 * [返回] -> returnFromChoiceA5
 
 === returnFromChoiceA1 ===
-~ choiceA1_done = true
+~ choiceA1_done = true 
+#returnFromChoiceA1
 -> companyA
 
 === returnFromChoiceA2 ===
 ~ choiceA2_done = true
+#returnFromChoiceA2
 -> companyA
 
 === returnFromChoiceA3 ===
 ~ choiceA3_done = true
+#returnFromChoiceA3
 -> companyA 
 
 === returnFromChoiceA4 ===
 ~ choiceA4_done = true
+#returnFromChoiceA4
 -> companyA 
 
 === returnFromChoiceA5 ===
 ~ choiceA5_done = true
+#returnFromChoiceA5
 -> companyA 
 
 
@@ -92,6 +98,7 @@ VAR choiceC5_done = false
 {choiceB1_done && choiceB2_done && choiceB3_done && choiceB4_done && choiceB5_done:
     * [進行其他公司分析] -> analysis
 }
+請選擇要對Elegance Accessories進行分析的問題：
 *[您提到的目標客群是25-35歲的女性，能否具體描述這些客群的消費習慣或偏好？過去您是如何針對這群體進行營銷的？] {not choiceB1_done} ->choiceB1
 *[150,000美元的預算分配上，您有沒有特別的考量？在廣告創意、投放和影響者合作之間，您希望如何分配這筆預算？] {not choiceB2_done} ->choiceB2
 *[三個月內達成10%的銷售量提升是一個比較緊迫的目標，您覺得這個時程安排可行嗎？是否有過類似的經驗來支持這個目標？] {not choiceB3_done} ->choiceB3
@@ -144,6 +151,7 @@ VAR choiceC5_done = false
 {choiceC1_done && choiceC2_done && choiceC3_done && choiceC4_done && choiceC5_done:
     * [進行其他公司分析] -> analysis
 }
+請選擇要對EcoEssentials進行分析的問題：
 *[您提到的目標客群具體是哪一類消費者？他們在環保產品方面的消費習慣和偏好是什麼？] {not choiceC1_done} ->choiceC1
 *[考慮到您目前的預算，您認為哪些推廣方式最能有效利用資金，達到您預期的效果？] {not choiceC2_done} ->choiceC2
 *[在這五個月內，您對達成這些目標的時程是否有具體的計劃和階段性目標？] {not choiceC3_done} ->choiceC3

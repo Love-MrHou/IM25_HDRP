@@ -47,8 +47,8 @@ namespace MyProject.Dialogs
                 buttons[i].gameObject.SetActive(false);
             }
 
-            // 初始化隱藏所有 Prefab 和 Text
-            HideAllPrefabsAndTexts();
+            // 不要隱藏 characterDialogPrefab，保持它在一開始顯示
+            HideAllPrefabsAndTextsExceptCharacterDialog();
 
             if (inkAssets.Length > 0)
             {
@@ -104,22 +104,25 @@ namespace MyProject.Dialogs
                     dialogText.text = nextLine;  // 顯示新的對話
                 }
 
-                // **偵測標籤並控制 prefab 和 text**
+                // 偵測標籤並決定按鈕生成位置
                 if (story.currentTags.Contains("GreenVital Foods代表"))
                 {
+                    // 隱藏主要對話框的按鈕，並在 GreenVital 的對話框生成選項
                     ShowDialog(greenVitalPrefab, greenVitalText, nextLine, greenVitalButtons);
                 }
                 else if (story.currentTags.Contains("Elegance Accessories代表"))
                 {
+                    // 隱藏主要對話框的按鈕，並在 Elegance 的對話框生成選項
                     ShowDialog(elegancePrefab, eleganceText, nextLine, eleganceButtons);
                 }
                 else if (story.currentTags.Contains("EcoEssentials代表"))
                 {
+                    // 隱藏主要對話框的按鈕，並在 EcoEssentials 的對話框生成選項
                     ShowDialog(ecoEssentialsPrefab, ecoEssentialsText, nextLine, ecoEssentialsButtons);
                 }
                 else if (story.currentTags.Contains("系統分析師1"))
                 {
-                    // 顯示/隱藏原有的 "人物對話ui(強化版)" 和 "廠商背景介紹 (1)" prefab
+                    // 隱藏主要對話框，顯示 vendorIntroPrefab
                     if (characterDialogPrefab != null)
                     {
                         characterDialogPrefab.SetActive(false);
@@ -127,88 +130,181 @@ namespace MyProject.Dialogs
 
                     if (vendorIntroPrefab != null)
                     {
-                        vendorIntroPrefab.SetActive(true);
+                        vendorIntroPrefab.SetActive(true);  // 顯示 "廠商背景介紹 (1)"
                     }
+                }
+                else
+                {
+                    // 沒有代表標籤，則在主要對話框生成選項
+                    ShowMainDialogButtons();
                 }
 
                 // 發送通知，讓其他系統知道對話更新了
                 OnDialogUpdate?.Invoke(story);
 
-                // 顯示選項按鈕（如果有）
+                // 在有選項的情況下，生成按鈕
                 if (story.currentChoices.Count > 0)
                 {
-                    SetChoices();
+                    // 如果有代表標籤，生成對應代表對話框的選項按鈕
+                    if (story.currentTags.Contains("GreenVital Foods代表"))
+                    {
+                        SetChoices(greenVitalButtons);
+                    }
+                    else if (story.currentTags.Contains("Elegance Accessories代表"))
+                    {
+                        SetChoices(eleganceButtons);
+                    }
+                    else if (story.currentTags.Contains("EcoEssentials代表"))
+                    {
+                        SetChoices(ecoEssentialsButtons);
+                    }
+                    else
+                    {
+                        // 沒有代表標籤時，生成主要對話框的選項按鈕
+                        SetChoices(buttons);
+                    }
                 }
                 else
                 {
-                    // 隱藏所有選項按鈕
-                    for (int i = 0; i < buttons.Length; i++)
-                    {
-                        buttons[i].gameObject.SetActive(false);
-                    }
+                    // 沒有選項時隱藏按鈕
+                    HideMainDialogButtons();
                 }
             }
         }
 
-        private void ShowDialog(GameObject prefab, Text text, string nextLine, Button[] buttons)
-        {
-            HideAllPrefabsAndTexts();  // 隱藏所有Prefab和Text
-            prefab.SetActive(true);  // 顯示當前Prefab
-            text.gameObject.SetActive(true);  // 顯示當前Text
-            text.text = nextLine;  // 更新Text的內容
 
-            // 顯示選項按鈕
-            SetChoices(buttons);
+
+        private void HideMainDialogButtons()
+        {
+            // 隱藏主要對話框的所有選項按鈕
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].gameObject.SetActive(false);
+            }
         }
 
-        private void SetChoices(Button[] buttons = null)
+        private void ShowMainDialogButtons()
         {
-            Button[] currentButtons = buttons != null ? buttons : this.buttons;
-
-            // 顯示選項按鈕，並設置選項文本
+            // 顯示主要對話框的選項按鈕，並設置選項文本
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
-                currentButtons[i].gameObject.SetActive(true);
-                currentButtons[i].GetComponentInChildren<Text>().text = story.currentChoices[i].text;
+                buttons[i].gameObject.SetActive(true);
+                buttons[i].GetComponentInChildren<Text>().text = story.currentChoices[i].text;
 
                 // 使用局部變數捕捉選項索引，避免閉包問題
                 int choiceIndex = i;
-                currentButtons[i].onClick.RemoveAllListeners();
-                currentButtons[i].onClick.AddListener(() => MakeChoice(choiceIndex));
+                buttons[i].onClick.RemoveAllListeners();
+                buttons[i].onClick.AddListener(() => MakeChoice(choiceIndex));
             }
 
             // 隱藏多餘的按鈕
-            for (int i = story.currentChoices.Count; i < currentButtons.Length; i++)
+            for (int i = story.currentChoices.Count; i < buttons.Length; i++)
             {
-                currentButtons[i].gameObject.SetActive(false);
+                buttons[i].gameObject.SetActive(false);
             }
         }
+
+        private void SetChoices(Button[] buttons)
+        {
+            // 確保 story.currentChoices 的數量不超過按鈕數量
+            if (story.currentChoices.Count > buttons.Length)
+            {
+                Debug.LogError("選項數量超過了可用按鈕的數量。");
+                return;
+            }
+
+            // 顯示對應的代表按鈕，並設置選項文本
+            for (int i = 0; i < story.currentChoices.Count; i++)
+            {
+                buttons[i].gameObject.SetActive(true);
+                buttons[i].GetComponentInChildren<Text>().text = story.currentChoices[i].text;
+
+                // 使用局部變數捕捉選項索引，避免閉包問題
+                int choiceIndex = i;
+                buttons[i].onClick.RemoveAllListeners();
+                buttons[i].onClick.AddListener(() => MakeChoice(choiceIndex));
+            }
+
+            // 隱藏多餘的按鈕
+            for (int i = story.currentChoices.Count; i < buttons.Length; i++)
+            {
+                buttons[i].gameObject.SetActive(false);
+            }
+        }
+
 
         public void MakeChoice(int index)
         {
-            story.ChooseChoiceIndex(index);  // 選擇對應選項
-            for (int i = 0; i < buttons.Length; i++)
+            if (index >= 0 && index < story.currentChoices.Count)
             {
-                buttons[i].gameObject.SetActive(false);  // 隱藏選項按鈕
+                // 選擇 Ink 故事中的選項
+                story.ChooseChoiceIndex(index);
+
+                // 判斷當前是從代表對話框返回
+                bool isRepresentativeDialogActive =
+                    greenVitalPrefab.activeSelf || elegancePrefab.activeSelf || ecoEssentialsPrefab.activeSelf;
+
+                // 隱藏所有代表對話框
+                HideAllPrefabsAndTexts();
+
+                // 顯示主要對話框
+                if (characterDialogPrefab != null)
+                {
+                    characterDialogPrefab.SetActive(true);
+                }
+
+                // 調用下一段對話
+                NextDialog();  // 常規呼叫
+
+                // 如果之前是在代表對話框，回到主要對話框時再調用一次 NextDialog
+                if (isRepresentativeDialogActive && characterDialogPrefab.activeSelf)
+                {
+                    NextDialog();  // 進行到下一段，保證剩餘選項正確顯示
+                }
             }
-            NextDialog();
+            else
+            {
+                Debug.LogError("選項索引超出範圍");
+            }
         }
 
-        private void HideAllPrefabsAndTexts()
+
+
+        // 只隱藏代表和背景介紹的 Prefab，保持人物對話ui(強化版)顯示
+        private void HideAllPrefabsAndTextsExceptCharacterDialog()
         {
-            // 隱藏所有Prefab
+            // 隱藏所有代表的Prefab
             greenVitalPrefab.SetActive(false);
             elegancePrefab.SetActive(false);
             ecoEssentialsPrefab.SetActive(false);
 
-            // 隱藏原有的 Prefab
-            //if (characterDialogPrefab != null)
-                //characterDialogPrefab.SetActive(false);
-
+            // 隱藏廠商背景介紹 Prefab
             if (vendorIntroPrefab != null)
                 vendorIntroPrefab.SetActive(false);
 
-            // 隱藏所有Text
+            // 隱藏所有代表的Text
+            greenVitalText.gameObject.SetActive(false);
+            eleganceText.gameObject.SetActive(false);
+            ecoEssentialsText.gameObject.SetActive(false);
+        }
+
+        // 隱藏所有Prefab和Text，包括 "人物對話ui(強化版)"
+        private void HideAllPrefabsAndTexts()
+        {
+            // 隱藏所有代表的Prefab
+            greenVitalPrefab.SetActive(false);
+            elegancePrefab.SetActive(false);
+            ecoEssentialsPrefab.SetActive(false);
+
+            // 隱藏原有的 "人物對話ui(強化版)" Prefab
+            if (characterDialogPrefab != null)
+                characterDialogPrefab.SetActive(false);
+
+            // 隱藏廠商背景介紹 Prefab
+            if (vendorIntroPrefab != null)
+                vendorIntroPrefab.SetActive(false);
+
+            // 隱藏所有代表的Text
             greenVitalText.gameObject.SetActive(false);
             eleganceText.gameObject.SetActive(false);
             ecoEssentialsText.gameObject.SetActive(false);
@@ -218,5 +314,25 @@ namespace MyProject.Dialogs
         {
             SceneManager.LoadScene("SampleScene");
         }
+
+        private void ShowDialog(GameObject prefab, Text text, string nextLine, Button[] buttons)
+        {
+            // 隱藏主要對話框的按鈕
+            HideMainDialogButtons();
+
+            // 隱藏所有的代表對話框和文本
+            HideAllPrefabsAndTexts();
+
+            // 顯示對應的代表對話框和文本
+            prefab.SetActive(true);
+            text.gameObject.SetActive(true);
+
+            // 設置對話文本
+            text.text = nextLine;
+
+            // 顯示對應代表的選項按鈕
+            SetChoices(buttons);
+        }
+
     }
 }
