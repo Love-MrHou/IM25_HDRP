@@ -6,6 +6,7 @@ public class NPCInteraction : MonoBehaviour
     private Animator animator;         // 用於控制動畫狀態
     private bool isTalking = false;    // 記錄是否已經進入交談狀態
     private bool isPlayerInRange = false; // 記錄玩家是否在觸發器範圍內
+    public GameObject targetObject; // 驚嘆號消失偵測
 
     void Start()
     {
