@@ -2675,9 +2675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3952894c88ea9244492dec4eaf9396c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minY: 6
-  maxY: 6.3
-  speed: 1
+  deltaY: 0.25
+  speed: 0.45
 --- !u!1 &1077021460
 GameObject:
   m_ObjectHideFlags: 0
@@ -8378,9 +8377,9 @@ Transform:
   m_GameObject: {fileID: 919132148907886135}
   serializedVersion: 2
   m_LocalRotation: {x: -0.023615096, y: -0.70671237, z: -0.70671237, w: 0.023615096}
-  m_LocalPosition: {x: -0.03200023, y: 5.273, z: 0.0460005}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.03200023, y: 5.7, z: 0.0460005}
+  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 543450652666702162}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -176.172}
@@ -11760,7 +11759,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7980751279232454965, guid: ff3f17a42b4fbd04e9fbb5045e58c7f1, type: 3}
+  - {fileID: 2100000, guid: 3d2068bcc6f4f014980fd57e39e942a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
