@@ -2,44 +2,25 @@ using UnityEngine;
 
 public class ObjectPingPong : MonoBehaviour
 {
-    public float minY = 5.3f;   // 最小的 y 位置
-    public float maxY = 5.5f;   // 最大的 y 位置
-    public float speed = 1.0f;  // 移动速度
+    [Header("Movement Settings")]
+    [Tooltip("The range within which the object will move up and down")]
+    [SerializeField] private float deltaY = 0.2f;   // 位移範圍
 
-    private bool movingUp = true; // 控制方向
+    [Tooltip("The speed at which the object moves")]
+    [SerializeField] private float speed = 1.0f;    // 移動速度
+
+    private float initialY;       // 初始 y 位置
+
+    void Start()
+    {
+        // 抓取物件的初始 y 位置
+        initialY = transform.position.y;
+    }
 
     void Update()
     {
-        // 获取当前物体位置
-        Vector3 currentPosition = transform.position;
-
-        // 如果物体正在向上移动
-        if (movingUp)
-        {
-            // 增加 y 位置，按照速度移动
-            currentPosition.y += speed * Time.deltaTime;
-
-            // 如果超过最大 y 值，改变方向
-            if (currentPosition.y >= maxY)
-            {
-                currentPosition.y = maxY;
-                movingUp = false;
-            }
-        }
-        else
-        {
-            // 减少 y 位置，按照速度移动
-            currentPosition.y -= speed * Time.deltaTime;
-
-            // 如果低于最小 y 值，改变方向
-            if (currentPosition.y <= minY)
-            {
-                currentPosition.y = minY;
-                movingUp = true;
-            }
-        }
-
-        // 更新物体位置
-        transform.position = currentPosition;
+        // 使用 Mathf.PingPong 來實現上下移動效果
+        float newY = initialY + Mathf.PingPong(Time.time * speed, deltaY * 2) - deltaY;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 }
