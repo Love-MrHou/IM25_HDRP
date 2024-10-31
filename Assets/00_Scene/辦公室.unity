@@ -12336,7 +12336,7 @@ MonoBehaviour:
   - {fileID: 5103725557029915983}
   - {fileID: 1834536657149516783}
   - {fileID: 7442791000954405820}
-  _inkAssets: {fileID: 4900000, guid: a86f0a60ca84b4b4a8b9826176aecbc1, type: 3}
+  _inkAssets: {fileID: 4900000, guid: 4a0c90e188c00f947929768cb7fbda35, type: 3}
 --- !u!1 &1951408925931605716
 GameObject:
   m_ObjectHideFlags: 0

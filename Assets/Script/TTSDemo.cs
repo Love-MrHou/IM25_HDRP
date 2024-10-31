@@ -11,6 +11,7 @@ public class TTSDemo : MonoBehaviour
     private string previousText = "";
     private string currentText = ""; // 用來儲存目前在Text UI中要轉換的文字
     private SpeechSynthesizer synthesizer;
+    public string speechSynthesisVoiceName;
 
     void Start()
     {
@@ -19,10 +20,12 @@ public class TTSDemo : MonoBehaviour
             Debug.LogError("Text UI is not assigned! Please assign a Text UI element.");
         }
 
+        // 使用 PullAudioOutputStream 來控制音頻資料，不再直接播放
         var config = SpeechConfig.FromSubscription("155998f0555f47ae9ad78430ef6491aa", "eastus");
         config.SpeechSynthesisLanguage = "zh-CN";
-        config.SpeechSynthesisVoiceName = "zh-TW-YunJheNeural";
-        var audioConfig = AudioConfig.FromDefaultSpeakerOutput();
+        config.SpeechSynthesisVoiceName = speechSynthesisVoiceName; // "zh-TW-HsiaoChenNeural"
+
+        var audioConfig = AudioConfig.FromStreamOutput(new PullAudioOutputStream());
         synthesizer = new SpeechSynthesizer(config, audioConfig);
     }
 
