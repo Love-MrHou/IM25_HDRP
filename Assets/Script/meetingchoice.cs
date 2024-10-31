@@ -25,6 +25,10 @@ public class meetingchoice : MonoBehaviour
     public Button designerButton3;
     public Button designerNextButton; // 設計師的下一步按鈕
 
+    public GameObject systemAnalystPrefab; // 系統分析師的Prefab
+    public GameObject engineerPrefab; // 工程師的Prefab
+    public GameObject designerPrefab; // 設計師的Prefab
+
     public TextAsset _inkAssets; // Inky 劇本
     private List<string> dialogHistory = new List<string>(); // 儲存對話紀錄
     private int currentDialogIndex = -1; // 目前的劇情index
@@ -67,6 +71,7 @@ public class meetingchoice : MonoBehaviour
     {
         if (story == null) return;
 
+        // 檢查故事是否已經結束並且沒有可供選擇的選項
         if (!story.canContinue && story.currentChoices.Count == 0)
         {
             Debug.Log("Dialog End");
@@ -74,31 +79,29 @@ public class meetingchoice : MonoBehaviour
             return;
         }
 
-        if (currentDialogIndex < dialogHistory.Count - 1)
-        {
-            currentDialogIndex++;
-            ShowDialogue(dialogHistory[currentDialogIndex]);
-        }
-        else if (story.canContinue)
+        // 如果還有對話可以繼續
+        while (story.canContinue)
         {
             string nextLine = story.Continue();
+
+            // 檢查是否為空白行或空字串
             if (!string.IsNullOrWhiteSpace(nextLine))
             {
-                dialogHistory.Add(nextLine);
+                dialogHistory.Add(nextLine); // 將對話添加到歷史
                 currentDialogIndex++;
-                ShowDialogue(nextLine);
+                ShowDialogue(nextLine); // 顯示對話內容並更新UI
+                break; // 結束循環，顯示此行對話
             }
             else
             {
                 Debug.LogWarning("Empty line detected in dialog. Skipping...");
-                NextDialog(); // 遇到空白時自動跳過
             }
+        }
 
-            // 設定選項按鈕（如果有選項）
-            if (story.currentChoices.Count > 0)
-            {
-                SetChoices();
-            }
+        // 顯示選項按鈕（如果有選項）
+        if (story.currentChoices.Count > 0)
+        {
+            SetChoices();
         }
     }
 
@@ -129,81 +132,32 @@ public class meetingchoice : MonoBehaviour
             switch (GetCurrentSpeaker())
             {
                 case "系統分析師":
-                    if (i == 0)
-                    {
-                        systemAnalystButton1.GetComponentInChildren<Text>().text = choiceText;
-                        systemAnalystButton1.gameObject.SetActive(true);
-                        systemAnalystButton1.onClick.RemoveAllListeners();
-                        systemAnalystButton1.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
-                    else if (i == 1)
-                    {
-                        systemAnalystButton2.GetComponentInChildren<Text>().text = choiceText;
-                        systemAnalystButton2.gameObject.SetActive(true);
-                        systemAnalystButton2.onClick.RemoveAllListeners();
-                        systemAnalystButton2.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
-                    else if (i == 2)
-                    {
-                        systemAnalystButton3.GetComponentInChildren<Text>().text = choiceText;
-                        systemAnalystButton3.gameObject.SetActive(true);
-                        systemAnalystButton3.onClick.RemoveAllListeners();
-                        systemAnalystButton3.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
+                    ShowChoiceButton(systemAnalystButton1, systemAnalystButton2, systemAnalystButton3, choiceText, choiceIndex);
                     break;
-
                 case "工程師":
-                    if (i == 0)
-                    {
-                        engineerButton1.GetComponentInChildren<Text>().text = choiceText;
-                        engineerButton1.gameObject.SetActive(true);
-                        engineerButton1.onClick.RemoveAllListeners();
-                        engineerButton1.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
-                    else if (i == 1)
-                    {
-                        engineerButton2.GetComponentInChildren<Text>().text = choiceText;
-                        engineerButton2.gameObject.SetActive(true);
-                        engineerButton2.onClick.RemoveAllListeners();
-                        engineerButton2.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
-                    else if (i == 2)
-                    {
-                        engineerButton3.GetComponentInChildren<Text>().text = choiceText;
-                        engineerButton3.gameObject.SetActive(true);
-                        engineerButton3.onClick.RemoveAllListeners();
-                        engineerButton3.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
+                    ShowChoiceButton(engineerButton1, engineerButton2, engineerButton3, choiceText, choiceIndex);
                     break;
-
                 case "設計師":
-                    if (i == 0)
-                    {
-                        designerButton1.GetComponentInChildren<Text>().text = choiceText;
-                        designerButton1.gameObject.SetActive(true);
-                        designerButton1.onClick.RemoveAllListeners();
-                        designerButton1.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
-                    else if (i == 1)
-                    {
-                        designerButton2.GetComponentInChildren<Text>().text = choiceText;
-                        designerButton2.gameObject.SetActive(true);
-                        designerButton2.onClick.RemoveAllListeners();
-                        designerButton2.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
-                    else if (i == 2)
-                    {
-                        designerButton3.GetComponentInChildren<Text>().text = choiceText;
-                        designerButton3.gameObject.SetActive(true);
-                        designerButton3.onClick.RemoveAllListeners();
-                        designerButton3.onClick.AddListener(() => MakeChoice(choiceIndex));
-                    }
+                    ShowChoiceButton(designerButton1, designerButton2, designerButton3, choiceText, choiceIndex);
                     break;
             }
         }
     }
 
+    private void ShowChoiceButton(Button button1, Button button2, Button button3, string choiceText, int choiceIndex)
+    {
+        Button buttonToUse = choiceIndex switch
+        {
+            0 => button1,
+            1 => button2,
+            _ => button3
+        };
 
+        buttonToUse.GetComponentInChildren<Text>().text = choiceText;
+        buttonToUse.gameObject.SetActive(true);
+        buttonToUse.onClick.RemoveAllListeners();
+        buttonToUse.onClick.AddListener(() => MakeChoice(choiceIndex));
+    }
 
     public void MakeChoice(int index)
     {
@@ -220,7 +174,6 @@ public class meetingchoice : MonoBehaviour
         }
     }
 
-
     public void back()
     {
         SceneManager.LoadScene("SampleScene");
@@ -231,32 +184,22 @@ public class meetingchoice : MonoBehaviour
     {
         HideAllDialogues(); // 每次顯示前先隱藏所有角色的對話框
 
-        // 調試代碼：輸出當前標註列表
-        if (story.currentTags.Count > 0)
-        {
-            Debug.Log("標註: " + string.Join(", ", story.currentTags));
-        }
-        else
-        {
-            Debug.LogWarning("未找到標註");
-        }
-
         string currentSpeaker = GetCurrentSpeaker(); // 取得當前講話角色1
         switch (currentSpeaker)
         {
             case "系統分析師":
                 systemAnalystText.text = nextLine;
-                systemAnalystText.gameObject.SetActive(true);
+                systemAnalystPrefab.SetActive(true); // 顯示系統分析師的Prefab
                 systemAnalystNextButton.gameObject.SetActive(true); // 顯示系統分析師的下一步按鈕
                 break;
             case "工程師":
                 engineerText.text = nextLine;
-                engineerText.gameObject.SetActive(true);
+                engineerPrefab.SetActive(true); // 顯示工程師的Prefab
                 engineerNextButton.gameObject.SetActive(true); // 顯示工程師的下一步按鈕
                 break;
             case "設計師":
                 designerText.text = nextLine;
-                designerText.gameObject.SetActive(true);
+                designerPrefab.SetActive(true); // 顯示設計師的Prefab
                 designerNextButton.gameObject.SetActive(true); // 顯示設計師的下一步按鈕
                 break;
             default:
@@ -264,7 +207,6 @@ public class meetingchoice : MonoBehaviour
                 break;
         }
     }
-
 
     // 根據當前對話段落的標註來取得講話的角色
     private string GetCurrentSpeaker()
@@ -277,24 +219,28 @@ public class meetingchoice : MonoBehaviour
     }
 
     // 隱藏所有角色的對話框和按鈕
+    // 隱藏所有角色的對話框和按鈕
     private void HideAllDialogues()
     {
-        systemAnalystText.gameObject.SetActive(false);
+        systemAnalystPrefab.SetActive(false);
+        engineerPrefab.SetActive(false);
+        designerPrefab.SetActive(false);
+
+        // 隱藏按鈕
         systemAnalystButton1.gameObject.SetActive(false);
         systemAnalystButton2.gameObject.SetActive(false);
         systemAnalystButton3.gameObject.SetActive(false);
-        systemAnalystNextButton.gameObject.SetActive(false); // 隱藏系統分析師的下一步按鈕
+        systemAnalystNextButton.gameObject.SetActive(false);
 
-        engineerText.gameObject.SetActive(false);
         engineerButton1.gameObject.SetActive(false);
         engineerButton2.gameObject.SetActive(false);
         engineerButton3.gameObject.SetActive(false);
-        engineerNextButton.gameObject.SetActive(false); // 隱藏工程師的下一步按鈕
+        engineerNextButton.gameObject.SetActive(false);
 
-        designerText.gameObject.SetActive(false);
         designerButton1.gameObject.SetActive(false);
         designerButton2.gameObject.SetActive(false);
         designerButton3.gameObject.SetActive(false);
-        designerNextButton.gameObject.SetActive(false); // 隱藏設計師的下一步按鈕
+        designerNextButton.gameObject.SetActive(false);
     }
+
 }
