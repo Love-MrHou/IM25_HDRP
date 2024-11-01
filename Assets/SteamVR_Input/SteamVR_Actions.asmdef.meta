@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/SteamVR_Input/SteamVR_Actions.asmdef.meta
 guid: cdfcd9b2cf1d8cf4a8c1b5f6f0ec9fe8
 AssemblyDefinitionImporter:
+========
+guid: 6e1b7690f5dd41d4887ebc282d9e18d8
+TextScriptImporter:
+>>>>>>>> feature/需求分析-ui:Assets/Inky/inky文本/Scene1/NPC文本1.json.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

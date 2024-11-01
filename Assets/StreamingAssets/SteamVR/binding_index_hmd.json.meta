@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/StreamingAssets/SteamVR/binding_index_hmd.json.meta
 guid: fbbbd85d9cba11a4eb47d8203ba840fe
+========
+guid: 82b683d77e959ac4a8356226b54bd316
+>>>>>>>> feature/需求分析-ui:Assets/Inky/inky文本/Scene1/NPC文本2.ink.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

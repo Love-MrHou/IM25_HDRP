@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/00_Scene/Opening.meta
 guid: 0b95f551a248ec64290c7425bd73bca0
+========
+guid: b10fb82faf6748f4aaa27c36bc9a30d5
+>>>>>>>> feature/需求分析-ui:Assets/Inky/inky文本/Scene2.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

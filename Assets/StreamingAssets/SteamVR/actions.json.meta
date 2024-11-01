@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/StreamingAssets/SteamVR/actions.json.meta
 guid: ba2f8a4d5aa62dd40b339cf44dcb1849
+========
+guid: 37d0c0eb0a648a04c885c680435397c6
+>>>>>>>> feature/需求分析-ui:Assets/Inky/inky文本/Scene1/NPC文本3.ink.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

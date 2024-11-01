@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Inky/會議模擬.json.meta
 guid: 6107a410fd705824fa7d1501a749829f
 TextScriptImporter:
+========
+guid: cdfcd9b2cf1d8cf4a8c1b5f6f0ec9fe8
+AssemblyDefinitionImporter:
+>>>>>>>> feature/需求分析-ui:Assets/SteamVR_Input/SteamVR_Actions.asmdef.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

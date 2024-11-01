@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/StreamingAssets/SteamVR/binding_rift.json.meta
 guid: 1444200329b192f46b0ad3d8c452295d
+========
+guid: b1743ab04afe0e0449ea5b5ad0eee5e8
+>>>>>>>> feature/需求分析-ui:Assets/Inky/inky文本/Scene1/NPC文本1.ink.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
