@@ -268,7 +268,7 @@ MonoBehaviour:
   - {fileID: 1729243029}
   - {fileID: 1819371291}
   - {fileID: 426505582}
-  _inkAssets: {fileID: 4900000, guid: 6e1b7690f5dd41d4887ebc282d9e18d8, type: 3}
+  _inkAssets: {fileID: 4900000, guid: b6554081b8dd764408bce3a6ed98b2e5, type: 3}
 --- !u!224 &69641392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
   - {fileID: 1923845927}
   - {fileID: 1196572926}
   - {fileID: 615477815}
-  _inkAssets: {fileID: 4900000, guid: 9db2fbbad94b2e941ac5f1485373b992, type: 3}
+  _inkAssets: {fileID: 4900000, guid: 6d5e9867b6818ba4092e9a16cc3a4125, type: 3}
 --- !u!224 &265227279
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2231,7 +2231,7 @@ MonoBehaviour:
   - {fileID: 1948327679}
   - {fileID: 163317231}
   - {fileID: 1477698683}
-  _inkAssets: {fileID: 4900000, guid: ba6bb062893b8bf40a9b0af82bc36e3f, type: 3}
+  _inkAssets: {fileID: 4900000, guid: b6554081b8dd764408bce3a6ed98b2e5, type: 3}
 --- !u!224 &745301775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3324,7 +3324,7 @@ MonoBehaviour:
   - {fileID: 231455787}
   - {fileID: 419737674}
   - {fileID: 2120276833}
-  _inkAssets: {fileID: 4900000, guid: fd8723a509d63ae43b2e69edce3db7ff, type: 3}
+  _inkAssets: {fileID: 4900000, guid: b8173c7587e66584f993b57d67bcbc72, type: 3}
 --- !u!224 &1317744392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5762,7 +5762,7 @@ MonoBehaviour:
   - {fileID: 365092719}
   - {fileID: 1515922521}
   - {fileID: 2026730484}
-  _inkAssets: {fileID: 4900000, guid: 760dc76bc95ce5049b773458e67a4351, type: 3}
+  _inkAssets: {fileID: 4900000, guid: 92b5d5a64e362f445b9a3d132f1a87b2, type: 3}
 --- !u!224 &1792657375
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12065,13 +12065,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1921261859937183071}
-        m_TargetAssemblyTypeName: DialogManger, Assembly-CSharp
-        m_MethodName: MakeChoice
-        m_Mode: 3
+      - m_Target: {fileID: 6889108866453677118}
+        m_TargetAssemblyTypeName: SceneChangerButton, Assembly-CSharp
+        m_MethodName: ChangeSceneButton
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 6254669681406010167}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
@@ -15108,7 +15108,7 @@ MonoBehaviour:
   - {fileID: 9209627964082068950}
   - {fileID: 2336996376146086774}
   - {fileID: 6796251209794114341}
-  _inkAssets: {fileID: 4900000, guid: 1f26429790153294ebfa915f1b989e4e, type: 3}
+  _inkAssets: {fileID: 4900000, guid: 6d5e9867b6818ba4092e9a16cc3a4125, type: 3}
 --- !u!137 &2581813338579274230
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -24537,13 +24537,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1921261859937183071}
-        m_TargetAssemblyTypeName: DialogManger, Assembly-CSharp
-        m_MethodName: MakeChoice
-        m_Mode: 3
+      - m_Target: {fileID: 6889108866453677118}
+        m_TargetAssemblyTypeName: SceneChangerButton, Assembly-CSharp
+        m_MethodName: ChangeSceneButton
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 270279685132531968}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -28305,6 +28305,7 @@ GameObject:
   - component: {fileID: 6889108866453677116}
   - component: {fileID: 1921261859937183071}
   - component: {fileID: 6889108866453677117}
+  - component: {fileID: 6889108866453677118}
   m_Layer: 5
   m_Name: DialogSystem
   m_TagString: Untagged
@@ -29885,7 +29886,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6342889926848883847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a646fffd316bc234d8c254683ea14fbd, type: 3}
   m_Name: 
@@ -29894,6 +29895,22 @@ MonoBehaviour:
   button1: {fileID: 270279685132531968}
   button2: {fileID: 6254669681406010167}
   playerName: Player
+--- !u!114 &6889108866453677118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342889926848883847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f241a94af148a4ab114dbf894f96c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName:
+  - "\u6703\u8B70\u6A21\u64EC"
+  - "\u8FA6\u516C\u5BA4"
+  - "\u6559\u80B2\u8A13\u7DF4"
 --- !u!4 &6919259231803399634
 Transform:
   m_ObjectHideFlags: 0
