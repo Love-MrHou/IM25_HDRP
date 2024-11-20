@@ -11,6 +11,7 @@ namespace MyProject.Dialogs
         public Text dialogText;  // 顯示對話的 Text
         public Button[] buttons;  // 主對話框的選項按鈕
         public TextAsset[] inkAssets;  // 多個 Inky 劇本的陣列（每個 NPC 可以有多個劇本）
+        public GameObject disappearui;
 
         // 原先的 Prefab
         public GameObject characterDialogPrefab;  // "人物對話ui(強化版)" prefab
@@ -84,6 +85,7 @@ namespace MyProject.Dialogs
                 currentInkAssetIndex++;
                 if (currentInkAssetIndex < inkAssets.Length)
                 {
+                    disappearui.SetActive(false);
                     Debug.Log("切換到下一個劇本。");
                     StartDialog(inkAssets[currentInkAssetIndex]);  // 加載下一個劇本
                     return;

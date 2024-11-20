@@ -24,7 +24,7 @@ public class SceneChangerButton : MonoBehaviour
                     sceneIndex = 0;
                     break;
 
-                case "返回大廳":
+                case "返回大廳" or "":
                     sceneIndex = 1;
                     break;
 
