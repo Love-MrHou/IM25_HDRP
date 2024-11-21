@@ -4,15 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class ShowDetailsSystemAnalysis : MonoBehaviour
 {
-    public Sprite[] sprites; //¨Ì§ÇÅã¥Üªº¹Ï¤ù
-    public Image imageDisplay; //­nÅã¥Üªºimageªº¦ì¸m
-    public Button nextButton; //¤Á´«¹Ï¤ùªº«ö¶s
-    public Canvas currentCanvas; //Åã¥Ü¹Ï¤ùªºcanva
-    public Canvas additionalCanvas; //Åã¥Ü¤T­Óuiªºcanva
+    public Sprite[] sprites; //ä¾åºé¡¯ç¤ºçš„åœ–ç‰‡
+    public Image imageDisplay; //è¦é¡¯ç¤ºçš„imageçš„ä½ç½®
+    public Button nextButton; //åˆ‡æ›åœ–ç‰‡çš„æŒ‰éˆ•
+    public Canvas currentCanvas; //é¡¯ç¤ºåœ–ç‰‡çš„canva
+    public Canvas additionalCanvas; //é¡¯ç¤ºä¸‰å€‹uiçš„canva
 
-    private int currentIndex = 0; //¥Î¨ÓÅã¥Ü¥Ø«e¹Ï¤ù
-    private int previousIndex = -1; //¥Î¨ÓÁôÂÃ¤W¤@±i¹Ï¤ù
-
+    private int currentIndex = 0; //ç”¨ä¾†é¡¯ç¤ºç›®å‰åœ–ç‰‡
+    private int previousIndex = -1; //ç”¨ä¾†éš±è—ä¸Šä¸€å¼µåœ–ç‰‡
+    private int count = 1;
     void Start()
     {
         ShowSprite(currentIndex);
@@ -24,27 +24,31 @@ public class ShowDetailsSystemAnalysis : MonoBehaviour
     {
         if (previousIndex != -1)
         {
-            HideSprite(previousIndex); //ÁôÂÃ¤W¤@±i¹Ï¤ù
+            HideSprite(previousIndex); //éš±è—ä¸Šä¸€å¼µåœ–ç‰‡
         }
 
-        currentIndex++; //Åã¥Üªº¹Ï¤ù¯Á¤Ş­È+1
+        currentIndex++; //é¡¯ç¤ºçš„åœ–ç‰‡ç´¢å¼•å€¼+1
 
-        if (currentIndex < sprites.Length) //¦pªGÁÙ¦³¹Ï¤ù­nÅã¥Ü
+        if (currentIndex < sprites.Length) //å¦‚æœé‚„æœ‰åœ–ç‰‡è¦é¡¯ç¤º
         {
-            ShowSprite(currentIndex); //Åã¥Ü²{¦bªº¹Ï¤ù
+            ShowSprite(currentIndex); //é¡¯ç¤ºç¾åœ¨çš„åœ–ç‰‡
         }
         else
         {
-            additionalCanvas.gameObject.SetActive(true); // §âÅã¥ÜªÀ¥æ³nÅéªºcanvaÅã¥Ü
-            currentCanvas.gameObject.SetActive(false); // §âÅã¥Ü¹Ï¤ùªºcanvaÁôÂÃ
+            if (count >= 1)
+            {
+                additionalCanvas.gameObject.SetActive(true); // æŠŠé¡¯ç¤ºç¤¾äº¤è»Ÿé«”çš„canvaé¡¯ç¤º
+                count--;
+            }
+            currentCanvas.gameObject.SetActive(false); // æŠŠé¡¯ç¤ºåœ–ç‰‡çš„canvaéš±è—
         }
     }
 
     void ShowSprite(int index)
     {
-        imageDisplay.sprite = sprites[index]; //Åã¥Ü²{¦bªº¹Ï¤ù
+        imageDisplay.sprite = sprites[index]; //é¡¯ç¤ºç¾åœ¨çš„åœ–ç‰‡
         imageDisplay.enabled = true; // enable = true
-        previousIndex = index; // §â«e¤@­Ó¹Ï¤ùªº¯Á¤Ş­È³]¬°¥Ø«e¹Ï¤ùªº¯Á¤Ş ¥Î¨Ó¤U¤@±i¹Ï¤ùÅã¥Ü®ÉÁôÂÃ
+        previousIndex = index; // æŠŠå‰ä¸€å€‹åœ–ç‰‡çš„ç´¢å¼•å€¼è¨­ç‚ºç›®å‰åœ–ç‰‡çš„ç´¢å¼• ç”¨ä¾†ä¸‹ä¸€å¼µåœ–ç‰‡é¡¯ç¤ºæ™‚éš±è—
     }
 
     void HideSprite(int index)
